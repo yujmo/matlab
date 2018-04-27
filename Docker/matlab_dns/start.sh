@@ -8,4 +8,5 @@
 #port6 53
 
 dnsmasq -D &
+echo '{"service": {"name": "node", "tags": ["dns"]}}' | tee /consul/config/node.json 
 consul agent -server -bootstrap-expect=1 -bind 0.0.0.0 -data-dir /consul/data/ -config-dir /consul/config/ -enable-script-checks=true
