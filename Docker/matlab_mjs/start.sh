@@ -1,4 +1,5 @@
 #!/bin/bash
+echo "101.132.149.154 student" >> /etc/hosts
 echo "nameserver dns.default.svc.cluster.local" > /etc/resolv.conf
 echo '{"service": {"name": "node", "tags": ["mjs"]}}' | sudo tee /consul/config/node.json 
 consul agent -bind 0.0.0.0 -join dns.default.svc.cluster.local -data-dir /consul/data/ -config-dir /consul/config/ -enable-script-checks=true  &
