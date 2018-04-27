@@ -7,7 +7,7 @@ apt-get install iputils-ping -y
 echo '{"service": {"name": "node", "tags": ["$MY_POD_NAME"]}}' | tee /consul/config/node.json 
 
 echo "101.132.149.154 student" >> /etc/hosts 
-consul agent -bind 0.0.0.0 -join dns.default.svc.cluster.local -data-dir /consul/data/ -config-dir /consul/config/ -enable-script-checks=true
+consul agent -bind 0.0.0.0 -join dns.default.svc.cluster.local -data-dir /consul/data/ -config-dir /consul/config/ -enable-script-checks=true &
 
 dns_ip=`consul members |grep server | awk '{print $2}' | cut -d : -f 1`
 
