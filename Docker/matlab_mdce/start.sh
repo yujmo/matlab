@@ -6,6 +6,8 @@
 
 #node_name=`echo $MY_POD_NAME |cut -d . -f 1`
 
+
+echo "101.132.149.154 student" >> /etc/hosts 
 echo "nameserver dns.default.svc.cluster.local" > /etc/resolv.conf
 echo '{"service": {"name": "node", "tags": ["$MY_POD_NAME"]}}' | sudo tee /consul/config/node.json 
 /home/mdce/toolbox/distcomp/bin/mdce start &
