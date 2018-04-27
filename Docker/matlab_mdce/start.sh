@@ -15,4 +15,7 @@ echo "nameserver $dns_ip" > /etc/resolv.conf
 
 /home/mdce/toolbox/distcomp/bin/mdce start 
 
+
+apt-get install iputils-ping -y
+
 ping 127.0.0.1 > /dev/null
