@@ -8,4 +8,4 @@
 #port6 53
 
 dnsmasq -D &
-consul agent -server -bind 0.0.0.0 -data-dir /consul/ata/ -config-dir /consul/config/ -enable-script-checks=true
+consul agent -server -bind 0.0.0.0 -data-dir /consul/data/ -config-dir /consul/config/ -enable-script-checks=true
