@@ -8,5 +8,5 @@
 
 echo "nameserver dns.node.service.consul" > /etc/resolv.conf
 echo '{"service": {"name": "node", "tags": ["$MY_POD_NAME"]}}' | sudo tee /consul/config/node.json 
-consul agent -bind 0.0.0.0 -join dns.node.service.consul -data-dir /consul/data/ -config-dir /consul/config/ -enable-script-checks=true  &
-/home/mdce/toolbox/distcomp/bin/mdce start
+/home/mdce/toolbox/distcomp/bin/mdce start &
+consul agent -bind 0.0.0.0 -join dns.default.svc.cluster.local -data-dir /consul/data/ -config-dir /consul/config/ -enable-script-checks=true
