@@ -1,3 +1,5 @@
+FROM yujmo/ubuntu:16.04
+
 ENV ROLE matlab_R2018a_license_manager
 
 MAINTAINER yujmo yujmo94@gmail.com
