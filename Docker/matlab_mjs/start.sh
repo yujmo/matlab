@@ -1,5 +1,6 @@
 #!/bin/bash
 
+sed -i "s/admin/student/g" /home/mjs/licenses/network.lic 
 
 echo '{"service": {"name": "node", "tags": ["mjs"]}}' | tee /consul/config/node.json 
 
