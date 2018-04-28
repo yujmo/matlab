@@ -23,7 +23,7 @@ consul members |grep client | awk -F : '{print $1}' | awk '{print $2 , $1}' > /e
 cat /etc/hosts.bak >> /etc/hosts
 
 
-/home/mjs/toolbox/distcomp/bin/startjobmanager --name xxx -remotehost mjs -v 
+/home/mjs/toolbox/distcomp/bin/startjobmanager -name xxx -remotehost mjs -v 
 /home/mjs/toolbox/distcomp/bin/startworker -jobmanagerhost mjs -jobmanager xxx -remotehost node1
 /home/mjs/toolbox/distcomp/bin/startworker -jobmanagerhost mjs -jobmanager xxx -remotehost node2
 
