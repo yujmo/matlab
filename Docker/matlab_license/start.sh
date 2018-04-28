@@ -20,13 +20,9 @@ echo "nameserver $dns_ip" > /etc/resolv.conf
 sudo -u admin /home/matlab/etc/lmstart 
 
 cp /etc/hosts /etc/hosts.bak 
-xx=`consul members |grep client | awk -F : '{print $1}' | awk '{print $2 , $1}'`
 while true
 do
-    yy=`consul members |grep client | awk -F : '{print $1}' | awk '{print $2 , $1}'`
-    if [ "$xx" = "$yy" ];then
-        consul members |grep client | awk -F : '{print $1}' | awk '{print $2 , $1}' > /etc/hosts
-        cat /etc/hosts.bak >> /etc/hosts
-    fi
+    consul members |grep client | awk -F : '{print $1}' | awk '{print $2 , $1}' > /etc/hosts
+    cat /etc/hosts.bak >> /etc/hosts
     sleep 1
 done
