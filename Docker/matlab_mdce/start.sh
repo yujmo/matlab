@@ -5,7 +5,7 @@
 #port4: 27353
 apt-get install iputils-ping net-tools -y
 sed -i "s/admin/student/g" /home/mdce/licenses/network.lic 
-echo '{"service": {"name": "node", "tags": ["$MY_POD_NAME"]}}' | tee /consul/config/node.json 
+echo {"service": {"name": "node", "tags": ["$MY_POD_NAME"]}} | tee /consul/config/node.json 
 echo "101.132.149.154 student" >> /etc/hosts 
 consul agent -bind 0.0.0.0 -join dns -data-dir /consul/data/ -config-dir /consul/config/ -enable-script-checks=true &
 
