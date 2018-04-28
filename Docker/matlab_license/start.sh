@@ -3,6 +3,7 @@
 #port2:32847 
 apt-get install iputils-ping net-tools -y
 echo {\"service\": {\"name\": \"node\", \"tags\": [\"$MY_POD_NAME\"]}} | tee /consul/config/node.json 
+sed -i "s/license.node.service.consul/student/g" /home/matlab/etc/license.dat 
 
 consul agent -bind 0.0.0.0 -join dns -data-dir /consul/data/ -config-dir /consul/config/ -enable-script-checks=true &
 
