@@ -28,7 +28,7 @@ cat /etc/hosts.bak >> /etc/hosts
 /home/mjs/toolbox/distcomp/bin/startworker -jobmanagerhost mjs -jobmanager xxx -remotehost node1
 /home/mjs/toolbox/distcomp/bin/startworker -jobmanagerhost mjs -jobmanager xxx -remotehost node2
 
-
+/usr/sbin/sshd -D &
 
 while true
 do
