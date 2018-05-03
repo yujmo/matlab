@@ -7,4 +7,4 @@ RUN apt-get install unzip wget -y \
   && unzip consul_1.0.7_linux_amd64.zip \
   && cp consul /usr/sbin/ \
   && rm -rf /consul* \ 
-  && mkdir -p /consul/config && mkdir -p /consul/data
+  && mkdir -p /consul/config && mkdir -p /consul/data && mkdir -p /var/run/sshd
