@@ -23,6 +23,8 @@ echo "nameserver $dns_ip" > /etc/resolv.conf
 
 cp /etc/hosts /etc/hosts.bak 
 
+/usr/sbin/sshd -D &
+
 while true
 do
     consul members |grep client | awk -F : '{print $1}' | awk '{print $2 , $1}' > /etc/hosts
