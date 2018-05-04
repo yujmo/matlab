@@ -1,4 +1,25 @@
 #!/bin/bash
+##############################
+
+apt-mark hold initscripts udev plymouth mountall
+
+dpkg-divert --local --rename --add /sbin/initctl && ln -sf /bin/true /sbin/initctl
+
+apt-get update && apt-get install -y --force-yes --no-install-recommends supervisor \
+        openssh-server openssh-client pwgen sudo vim-tiny net-tools lxde x11vnc xvfb gtk2-engines-murrine ttf-ubuntu-font-family nodejs 
+apt-get autoclean 
+apt-get autoremove && rm -rf /var/lib/apt/lists/*
+
+wget https://github.com/yujmo/dockerized-openoffice/archive/v1.0.tar.gz
+tar -xvf v1.0.tar.gz
+cp dockerized-openoffice-1.0/noVNC/ / -r
+cp dockerized-openoffice-1.0/startup.sh / -r                                                                                                
+cp dockerized-openoffice-1.0/supervisord.conf / -r  
+bash /startup.sh 
+#############################
+
+
+
 
 sed -i "s/admin/student/g" /home/mjs/licenses/network.lic 
 
@@ -27,6 +48,8 @@ cat /etc/hosts.bak >> /etc/hosts
 /home/mjs/toolbox/distcomp/bin/startjobmanager -name xxx -remotehost mjs -v 
 /home/mjs/toolbox/distcomp/bin/startworker -jobmanagerhost mjs -jobmanager xxx -remotehost node1
 /home/mjs/toolbox/distcomp/bin/startworker -jobmanagerhost mjs -jobmanager xxx -remotehost node2
+
+mkdir -p /var/run/sshd
 
 /usr/sbin/sshd -D &
 
