@@ -3,6 +3,11 @@
 #port2: 4455
 #port3: 27352
 #port4: 27353
+
+
+
+mkdir -p /var/run/sshd
+
 apt-get install iputils-ping net-tools openssh-client openssh-server -y
 sed -i "s/admin/student/g" /home/mdce/licenses/network.lic 
 echo {\"service\": {\"name\": \"node\", \"tags\": [\"$MY_POD_NAME\"]}} | tee /consul/config/node.json 
