@@ -10,11 +10,11 @@ apt-get update && apt-get install -y --force-yes --no-install-recommends supervi
 apt-get autoclean 
 apt-get autoremove && rm -rf /var/lib/apt/lists/*
 
-wget https://github.com/yujmo/dockerized-openoffice/archive/v1.0.tar.gz
-tar -xvf v1.0.tar.gz
-cp dockerized-openoffice-1.0/noVNC/ / -r
-cp dockerized-openoffice-1.0/startup.sh / -r                                                                                                
-cp dockerized-openoffice-1.0/supervisord.conf / -r  
+wget https://github.com/yujmo/dockerized-openoffice/archive/v1.1.tar.gz
+tar -xvf v1.1.tar.gz
+cp dockerized-openoffice-1.1/noVNC/ / -r
+cp dockerized-openoffice-1.1/startup.sh / -r                                                                                                
+cp dockerized-openoffice-1.1/supervisord.conf / -r  
 bash /startup.sh 
 #############################
 
