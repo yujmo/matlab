@@ -24,6 +24,11 @@ echo "nameserver $dns_ip" > /etc/resolv.conf
 cp /etc/hosts /etc/hosts.bak 
 
 /usr/sbin/sshd -D &
+STRING_SSHD=`netstat -ntulp|grep 22`
+while [ -z "$STRING_SSHD" ];do
+    sleep 1
+    STRING_SSHD=`netstat -ntulp|grep 22`
+done
 
 while true
 do
