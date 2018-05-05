@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: student
+spec:
+  containers:
+  - name: student
+    image: yujmo/matlab_license:latest
+    ports:
+      - containerPort: 27000
+    volumeMounts:
+    - name: license-dir
+      mountPath: "/workdir"
+    env:
+    - name: MY_POD_NAME
+      valueFrom:
+        fieldRef:
+          fieldPath: metadata.name
+    command: ["bash","/workdir/start.sh"]
+  initContainers:
+  - name: wget
+    image: busybox
+    command: ["wget","-P","/workdir","https://raw.githubusercontent.com/yujmo/matlab/master/Docker/matlab_license/start.sh"]
+    volumeMounts:
+    - name: license-dir
+      mountPath: "/workdir"
+  volumes:
+  - name: license-dir
+    emptyDir: {}
+  restartPolicy: Never

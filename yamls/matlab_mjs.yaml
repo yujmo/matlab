@@ -1,0 +1,45 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: mjs-vnc
+  labels:
+    app: yy
+spec:
+  type: NodePort
+  ports:
+    - port: 6080
+      nodePort: 30008
+      targetPort: 6080
+  selector:
+    app: yy
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mjs
+  labels:
+    app: yy
+spec:
+  containers:
+  - name: mjs
+    image: yujmo/matlab_mjs:latest
+    volumeMounts:
+    - name: mjs-dir
+      mountPath: "/workdir"
+    command: ["bash","/workdir/start.sh"]
+    ports:
+      - containerPort: 27350
+        name: x1
+      - containerPort: 27352
+        name: x2
+  restartPolicy: Never
+  initContainers:
+  - name: wget
+    image: busybox
+    command: ["wget","-P","/workdir","https://raw.githubusercontent.com/yujmo/matlab/master/Docker/matlab_mjs/start.sh"]
+    volumeMounts:
+    - name: mjs-dir
+      mountPath: "/workdir"
+  volumes:
+  - name: mjs-dir
+    emptyDir: {}

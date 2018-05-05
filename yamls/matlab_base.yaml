@@ -1,0 +1,79 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: node1
+spec:
+  containers:
+  - name: node1
+    image: yujmo/matlab_mdce:latest
+    ports:
+    - containerPort: 32000
+      name: x1
+    - containerPort: 4455
+      name: x2
+    - containerPort: 27352
+      name: x3
+    - containerPort: 27353
+      name: x4
+    - containerPort: 27350
+      name: x5
+    volumeMounts:
+    - name: node1-dir
+      mountPath: "/workdir"
+    env:
+    - name: MY_POD_NAME
+      valueFrom:
+        fieldRef:
+          fieldPath: metadata.name
+    command: ["bash","/workdir/start.sh"]
+  initContainers:
+  - name: wget
+    image: busybox
+    command: ["wget","-P","/workdir","https://raw.githubusercontent.com/yujmo/matlab/master/Docker/matlab_mdce/start.sh"]
+    volumeMounts:
+    - name: node1-dir
+      mountPath: "/workdir"
+  volumes:
+  - name: node1-dir
+    emptyDir: {}
+  restartPolicy: Never
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: node2
+spec:
+  containers:
+  - name: node2
+    image: yujmo/matlab_mdce:latest
+    ports:
+    - containerPort: 32000
+      name: x1
+    - containerPort: 4455
+      name: x2
+    - containerPort: 27352
+      name: x3
+    - containerPort: 27353
+      name: x4
+    - containerPort: 27350
+      name: x5
+    volumeMounts:
+    - name: node2-dir
+      mountPath: "/workdir"
+    env:
+    - name: MY_POD_NAME
+      valueFrom:
+        fieldRef:
+          fieldPath: metadata.name
+    command: ["bash","/workdir/start.sh"]
+  initContainers:
+  - name: wget
+    image: busybox
+    command: ["wget","-P","/workdir","https://raw.githubusercontent.com/yujmo/matlab/master/Docker/matlab_mdce/start.sh"]
+    volumeMounts:
+    - name: node2-dir
+      mountPath: "/workdir"
+  volumes:
+  - name: node2-dir
+    emptyDir: {}
+  restartPolicy: Never

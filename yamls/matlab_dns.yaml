@@ -1,0 +1,65 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: dns
+spec:
+  selector:
+    app: dns
+  ports:
+  - port: 8300
+    targetPort: 8300
+    name: port1
+  - port: 8301
+    targetPort: 8301
+    name: port2
+  - port: 8302
+    targetPort: 8302
+    name: port3
+  - port: 8500
+    targetPort: 8500
+    name: port4
+  - port: 8600
+    targetPort: 8600
+    name: port5
+  - port: 53
+    targetPort: 53
+    name: port6
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: dns-pod
+  labels:
+    app: dns
+spec:
+  containers:
+  - name: dns-pod
+    image: yujmo/matlab_dns:latest
+    ports:
+      - containerPort: 8300
+        name: port1
+      - containerPort: 8301
+        name: port2
+      - containerPort: 8302
+        name: port3
+      - containerPort: 8500
+        name: port4
+      - containerPort: 8600
+        name: port5
+      - containerPort: 53
+        name: port6
+    volumeMounts:
+    - name: dns-dir
+      mountPath: "/workdir"
+    command: ["bash","/workdir/start.sh"]
+  initContainers:
+  - name: wget
+    image: busybox
+    command: ["wget","-P","/workdir","https://raw.githubusercontent.com/yujmo/matlab/master/Docker/matlab_dns/start.sh"]
+    volumeMounts:
+    - name: dns-dir
+      mountPath: "/workdir"
+  volumes:
+  - name: dns-dir
+    emptyDir: {}
+  restartPolicy: Never
