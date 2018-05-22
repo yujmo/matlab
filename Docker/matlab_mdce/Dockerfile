@@ -1,8 +1,8 @@
-FROM yujmo/ubuntu:16.04
+FROM nvidia/cuda:9.2-devel-ubuntu16.04
 
 ADD mdce /home/mdce
 
-RUN apt-get install unzip wget -y \
+RUN apt-get update && apt-get install unzip wget -y \
   && wget https://releases.hashicorp.com/consul/1.0.7/consul_1.0.7_linux_amd64.zip \
   && unzip consul_1.0.7_linux_amd64.zip \
   && cp consul /usr/sbin/ \
