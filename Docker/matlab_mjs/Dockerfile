@@ -1,5 +1,4 @@
-FROM yujmo/ubuntu:16.04
-
+FROM nvidia/cuda:9.2-devel-ubuntu16.04
 ADD mjs /home/mjs
 
 RUN apt-get install unzip wget -y \
