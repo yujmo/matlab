@@ -4,8 +4,9 @@
 apt-mark hold initscripts udev plymouth mountall
 
 dpkg-divert --local --rename --add /sbin/initctl && ln -sf /bin/true /sbin/initctl
-
-apt-get update && apt-get install -y --force-yes --no-install-recommends supervisor \
+apt-get update
+apt-get install libxt6 -y
+apt-get install -y --force-yes --no-install-recommends supervisor \
         openssh-server openssh-client pwgen sudo vim-tiny net-tools lxde x11vnc xvfb gtk2-engines-murrine ttf-ubuntu-font-family nodejs 
 apt-get autoclean 
 apt-get autoremove && rm -rf /var/lib/apt/lists/*
